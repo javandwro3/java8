@@ -2,6 +2,7 @@ package pl.jwrabel.trainings.javandwro3.java8;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -80,10 +81,27 @@ public class Streams {
 			}
 		});
 
+		// === ZADANIE === utworzyć listę z liczbami od 1 do 100, wypisać nieparzyste
+		System.out.println("--- wypisanie liczb nieparzystych ---");
+		List<Integer> integers = new ArrayList<>();
+		for (int i = 1; i <= 100; i++) {
+			integers.add(i);
+		}
 
-		
+		integers.stream().filter(x -> x % 2 == 1).forEach(x -> System.out.println(x));
 
+		// Sortowanie
+		System.out.println("--- SORTOWANIE ---");
+		integers.stream().sorted((x, y) -> {
+			if (x > y) {
+				return -1;
+			}
+			if (x < y) {
+				return 1;
+			}
+			return 0;
 
+		}).forEach(x -> System.out.println(x));
 
 
 	}
