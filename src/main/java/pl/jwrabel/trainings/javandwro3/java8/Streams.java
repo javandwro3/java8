@@ -103,6 +103,30 @@ public class Streams {
 
 		}).forEach(x -> System.out.println(x));
 
+		// Matchery
+		boolean isAnyNumberLargerThan5 = integers.stream().anyMatch(x -> x > 5);
+		boolean areAllElementsLessThan10 = integers.stream().allMatch(x -> x < 10);
+		boolean isThereNoElementLessThan0 = integers.stream().noneMatch(x -> x < 0);
+
+		boolean isNoneLessThan0 = true;
+		for (Integer integer : list) {
+			if (integer < 0) {
+				isNoneLessThan0 = false;
+				break;
+			}
+		}
+
+
+		// Count
+		long amountOfLessThan5 = list.stream().filter(x -> x < 5).count();
+
+		// Peek
+		System.out.println("--- PEEK ---");
+		list.stream()
+				.peek(x -> System.out.println(x))
+				.filter(x -> x > 4)
+				.forEach(x -> System.out.println("Greated than 4: " + x));
+
 
 	}
 
