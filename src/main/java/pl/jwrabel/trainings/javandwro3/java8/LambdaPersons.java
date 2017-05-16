@@ -3,6 +3,7 @@ package pl.jwrabel.trainings.javandwro3.java8;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by jakubwrabel on 18.03.2017.
@@ -61,6 +62,18 @@ public class LambdaPersons {
 
 
 		}).forEach(x -> System.out.println(x));
+
+		// 4. z użyciem collectora joining wypisać osoby (stworzyć Stringa)
+		// START
+		// Adam Kowalski
+		// ...
+		// Piotr Kowalski
+		// KONIEC
+		System.out.println("Wypisanie osób z użyciem joining");
+		String text = personList.stream()
+				.map(p -> p.getFirstName() + " " + p.getLastName())
+				.collect(Collectors.joining("\n", "START\n", "\nKONIEC"));
+		System.out.println(text);
 
 
 	}
