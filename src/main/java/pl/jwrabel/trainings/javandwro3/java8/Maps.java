@@ -1,6 +1,5 @@
 package pl.jwrabel.trainings.javandwro3.java8;
 
-import pl.jwrabel.trainings.semiadvanced.java8.model.Point;
 
 import java.util.*;
 
