@@ -153,6 +153,13 @@ public class Streams2 {
 		// DoubleStream
 		DoubleStream.of(1, 2, 3d);
 
+		int intX = 10;
+		double doubleX = 30d;
+		double doubleY = 30D;
+		float floatX = 30f;
+		float floatY = 30F;
+		long longX = 30l;
+		long longY = 30L;
 
 		// ZAMIANA TABLICY NA STRUMIEN
 		int[] array = {1, 2, 3, 4, 5};
