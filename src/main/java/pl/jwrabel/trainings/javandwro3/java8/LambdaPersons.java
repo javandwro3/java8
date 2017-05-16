@@ -40,6 +40,27 @@ public class LambdaPersons {
 				.forEach(x -> System.out.println(x));
 
 		// POSORTOWAC OSOBY PO Nazwisku, Imieniu, Mieście
+		System.out.println("--- OSOBY POSORTOWANE PO NAZWISKU, IMIENIU, MIESCIE ---");
+		personList.stream().sorted((p1, p2) -> {
+
+//			"ABC".equals("BCD") TO TO SAMO CO "ABC".compareTo("BCD") == 0
+
+			if (!p1.getLastName().equals(p2.getLastName())) {
+				return p1.getLastName().compareTo(p2.getLastName());
+			}
+			// to to samo co
+//			if (p1.getLastName().compareTo(p2.getLastName()) != 0) {
+//				return p1.getLastName().compareTo(p2.getLastName());
+//			}
+
+			if (!p1.getFirstName().equals(p2.getFirstName())) {
+				return p1.getFirstName().compareTo(p2.getFirstName());
+			}
+
+			return p1.getCity().compareTo(p2.getCity());
+
+
+		}).forEach(x -> System.out.println(x));
 
 
 	}
