@@ -1,10 +1,9 @@
 package pl.jwrabel.trainings.javandwro3.java8;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Created by jakubwrabel on 15/05/2017.
@@ -19,18 +18,29 @@ public class Streams {
 		list.add(10);
 		list.add(3);
 
+		// ZAMIANA LISTY (KOLEKCJI) NA STRUMIEN
+		list.stream();
+
+		// ZAMIANA TABLICY NA STRUMIEN
+		int[] array = new int[10];
+		Arrays.stream(array);
+
+
 		list.stream()
 				.forEach(
 						new Consumer<Integer>() {
 							@Override
-							public void accept(Integer integer) {
-								System.out.println(integer);
+							public void accept(Integer x) {
+								System.out.println(x);
 							}
 						}
 				);
-
-
+		// TO TO SAMO CO
 		list.stream().forEach(x -> System.out.println(x));
+
+		// JEDEN PARAMETR METODY, JEDNA OPERACJA W METODZIE
+		list.stream().forEach(x -> System.out.println(x));
+		list.stream().forEach(element -> System.out.println(element));
 
 
 		list.stream()
@@ -44,15 +54,28 @@ public class Streams {
 						}
 				);
 
+		// JEDEN PARAMETR, KILKA INSTRUKCJI
 		list.stream().forEach(x -> {
 			System.out.println(x);
 			System.out.println("Twice:" + x);
 		});
-
+		// efekt identyczny do
 		for (Integer integer : list) {
 			System.out.println(integer);
 			System.out.println("Twice:" + integer);
 		}
+
+		// WIELE PARAMETRÓW
+		list.stream().sorted((x, y) -> {
+			if (x > y) {
+				return -1;
+			}
+			if (x < y) {
+				return 1;
+			}
+			return 0;
+
+		});
 
 		list.stream().forEach(x -> {
 			System.out.println(x);
@@ -89,19 +112,32 @@ public class Streams {
 		}
 
 		integers.stream().filter(x -> x % 2 == 1).forEach(x -> System.out.println(x));
+		integers.stream().filter(x -> {
+					if (x > 10) {
+						if (x % 2 == 1) {
+							return true;
+						}
+					}
+					return false;
+				}
+		).forEach(x -> System.out.println(x));
 
-		// Sortowanie
+		// Sortowanie domyślne
+		integers.stream().sorted().forEach(x -> System.out.println(x));
+
+		// Sortowanie z własnym Comparatorem
 		System.out.println("--- SORTOWANIE ---");
 		integers.stream().sorted((x, y) -> {
-			if (x > y) {
-				return -1;
-			}
 			if (x < y) {
 				return 1;
+			}
+			if (x > y) {
+				return -1;
 			}
 			return 0;
 
 		}).forEach(x -> System.out.println(x));
+
 
 		// Matchery
 		boolean isAnyNumberLargerThan5 = integers.stream().anyMatch(x -> x > 5);
@@ -126,6 +162,37 @@ public class Streams {
 				.peek(x -> System.out.println(x))
 				.filter(x -> x > 4)
 				.forEach(x -> System.out.println("Greated than 4: " + x));
+
+		// MAPOWANIE
+		System.out.println("--- MAPOWANIE ---");
+		list.stream().map(x -> "Number: " + x).forEach(x -> System.out.println(x));
+
+		// MAX, MIN
+		Optional<Integer> max = list.stream().max((x, y) -> {
+			if (x < y) {
+				return -1;
+			}
+			if (x > y) {
+				return 1;
+			}
+			return 0;
+
+		});
+		Optional<Integer> min = list.stream().min((x, y) -> {
+			if (x < y) {
+				return -1;
+			}
+			if (x > y) {
+				return 1;
+			}
+			return 0;
+
+		});
+
+		// COLLECTOR
+		List<Integer> collect = list.stream().filter(x -> x < 5).collect(Collectors.toList());
+		Set<Integer> collectSet = list.stream().filter(x -> x < 5).collect(Collectors.toSet());
+		String collect1 = list.stream().filter(x -> x < 5).map(x -> "" + x).collect(Collectors.joining(","));
 
 
 	}
