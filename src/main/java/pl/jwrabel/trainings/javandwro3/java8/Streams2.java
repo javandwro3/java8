@@ -101,6 +101,9 @@ public class Streams2 {
 		list.stream().map(x -> x * x).forEach(x -> System.out.println(x));
 		list.stream().map(x -> "Number: " + x).forEach(x -> System.out.println(x));
 
+		// DISTINCT - usunięcie duplikatów, zostawia unikalne wartości
+		list.stream().distinct();
+
 		// MAX, MIN
 		list.stream().max((x, y) -> x > y ? 1 : (x == y) ? 0 : -1);
 		list.stream().min((x, y) -> x > y ? 1 : (x == y) ? 0 : -1);

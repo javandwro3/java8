@@ -1,9 +1,7 @@
 package pl.jwrabel.trainings.javandwro3.java8;
 
 
-import java.util.ArrayList;
-import java.util.IntSummaryStatistics;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -70,7 +68,7 @@ public class LambdaPersons {
 		// ...
 		// Piotr Kowalski
 		// KONIEC
-		System.out.println("Wypisanie osób z użyciem joining");
+		System.out.println("Wypisanie osób z użyciem joining (Stworzenie jednego Stringa z listy osób)");
 		String text = personList.stream()
 				.map(p -> p.getFirstName() + " " + p.getLastName())
 				.collect(Collectors.joining("\n", "START\n", "\nKONIEC"));
@@ -82,6 +80,39 @@ public class LambdaPersons {
 				= personList.stream().mapToInt(p -> p.getLastName().length()).summaryStatistics();
 		double average = intSummaryStatistics.getAverage();
 		System.out.println("Srednia dlugosc nazwiska: " + average);
+
+		// 6. Wypisać osoby w postaci
+		// WARSZAWA
+		// 	Adam Nowak
+		// WROCŁAW
+		//  Piotr Kowalski
+		// 	Adam Kowalski
+		System.out.println("----- WYPISANIE OSÓB Z MIASTA ------");
+
+		Map<String, List<Person>> citiesPeopleMap = personList.stream().collect(Collectors.groupingBy(p -> p.getCity()));
+		Set<Map.Entry<String, List<Person>>> entries = citiesPeopleMap.entrySet();
+		for (Map.Entry<String, List<Person>> entry : entries) {
+			System.out.println(entry.getKey().toUpperCase());
+
+			List<Person> people = entry.getValue();
+			for (Person person : people) {
+				System.out.println("\t" + person.getFirstName() + " " + person.getLastName());
+			}
+		}
+		// TO TO SAMO CO TO:
+		citiesPeopleMap.forEach((key, value) -> {
+			System.out.println(key.toUpperCase());
+			value.forEach(p -> System.out.println("\t" + p.getFirstName() + " " + p.getLastName()));
+		});
+
+		// TO TO SAMO
+		personList.stream()
+				.collect(Collectors.groupingBy(p -> p.getCity()))
+				.forEach((key, value) -> {
+					System.out.println(key.toUpperCase());
+					value.forEach(p -> System.out.println("\t" + p.getFirstName() + " " + p.getLastName()));
+				});
+
 
 	}
 }
