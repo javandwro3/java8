@@ -2,6 +2,7 @@ package pl.jwrabel.trainings.javandwro3.java8;
 
 
 import java.util.ArrayList;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -75,6 +76,12 @@ public class LambdaPersons {
 				.collect(Collectors.joining("\n", "START\n", "\nKONIEC"));
 		System.out.println(text);
 
+		// 5. z użyciem summary statistics
+		// podać średnią długość nazwisk osób
+		IntSummaryStatistics intSummaryStatistics
+				= personList.stream().mapToInt(p -> p.getLastName().length()).summaryStatistics();
+		double average = intSummaryStatistics.getAverage();
+		System.out.println("Srednia dlugosc nazwiska: " + average);
 
 	}
 }
