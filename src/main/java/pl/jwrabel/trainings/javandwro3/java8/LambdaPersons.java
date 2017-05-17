@@ -136,5 +136,8 @@ public class LambdaPersons {
 			System.out.println("Liczba osób: " + numberOfPeopleFromCity);
 		});
 
+		// 8.
+		// ADAM -> 2 miasta
+		// PIOTR -> 1 miast
 	}
 }
