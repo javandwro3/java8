@@ -90,6 +90,8 @@ public class LambdaPersons {
 		System.out.println("----- WYPISANIE OSÓB Z MIASTA ------");
 
 		Map<String, List<Person>> citiesPeopleMap = personList.stream().collect(Collectors.groupingBy(p -> p.getCity()));
+
+
 		Set<Map.Entry<String, List<Person>>> entries = citiesPeopleMap.entrySet();
 		for (Map.Entry<String, List<Person>> entry : entries) {
 			System.out.println(entry.getKey().toUpperCase());
@@ -105,7 +107,7 @@ public class LambdaPersons {
 			value.forEach(p -> System.out.println("\t" + p.getFirstName() + " " + p.getLastName()));
 		});
 
-		// TO TO SAMO
+		// A CAŁE ZADANIE TO TO SAMO
 		personList.stream()
 				.collect(Collectors.groupingBy(p -> p.getCity()))
 				.forEach((key, value) -> {
@@ -113,6 +115,26 @@ public class LambdaPersons {
 					value.forEach(p -> System.out.println("\t" + p.getFirstName() + " " + p.getLastName()));
 				});
 
+		// 7. wypisać osoby
+		// WROCŁAW -> 2 osoby
+		// WARSZAWA -> 1 osoba
+		personList.stream()
+				.collect(Collectors.groupingBy(p -> p.getCity()))
+				.forEach((city, peoples) -> {
+					System.out.println("Miasto: " + city);
+					System.out.println("Liczba osób: " + peoples.size());
+				});
+
+
+
+		Set<String> citiesNames = personList.stream().map(p -> p.getCity()).collect(Collectors.toSet());
+
+		citiesNames.forEach(city -> {
+			System.out.println("Miasto: " + city);
+
+			long numberOfPeopleFromCity = personList.stream().filter(p -> p.getCity().equals(city)).count();
+			System.out.println("Liczba osób: " + numberOfPeopleFromCity);
+		});
 
 	}
 }
