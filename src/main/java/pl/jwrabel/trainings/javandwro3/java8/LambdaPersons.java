@@ -125,8 +125,7 @@ public class LambdaPersons {
 					System.out.println("Liczba osób: " + peoples.size());
 				});
 
-
-
+		// LUB
 		Set<String> citiesNames = personList.stream().map(p -> p.getCity()).collect(Collectors.toSet());
 
 		citiesNames.forEach(city -> {
@@ -139,5 +138,14 @@ public class LambdaPersons {
 		// 8.
 		// ADAM -> 2 miasta
 		// PIOTR -> 1 miast
+		System.out.println("-------------------");
+		personList.stream()
+				.collect(Collectors.groupingBy(p -> p.getFirstName()))
+				.forEach((firstName, peoples) -> {
+					System.out.println("IMIĘ: " + firstName);
+					long citiesNumber = peoples.stream().map(p -> p.getCity()).distinct().count();
+					System.out.println("Liczba miast: " + citiesNumber);
+				});
+
 	}
 }
